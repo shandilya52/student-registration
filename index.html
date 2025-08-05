@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Registration Portal</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- ✅ Fullscreen Vector Background Image -->
+    <div class="fixed-bg"></div>
+
+    <!-- 🔁 Background animations -->
+    <canvas id="neuralCanvas"></canvas>
+    <canvas id="circuitCanvas"></canvas>
+
+    <div class="background-animation">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+
+    <section class="form-wrapper">
+      <h1 class="title">🚀 Student Registration</h1>
+      <div class="progress-bar"><div class="progress"></div></div>
+
+      <form id="registrationForm" action="submit.php" method="POST">
+        <!-- Step 1 -->
+        <div class="form-step active">
+          <div class="voice-field">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Full Name"
+              required
+            />
+            <button
+              type="button"
+              class="mic-btn"
+              onclick="startVoiceInput('name')"
+            >
+              🎤
+            </button>
+          </div>
+          <div class="voice-field">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email Address"
+              required
+            />
+            <button
+              type="button"
+              class="mic-btn"
+              onclick="startVoiceInput('email')"
+            >
+              🎤
+            </button>
+          </div>
+          <div class="voice-field">
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Phone Number"
+              required
+            />
+            <button
+              type="button"
+              class="mic-btn"
+              onclick="startVoiceInput('phone')"
+            >
+              🎤
+            </button>
+          </div>
+          <input type="date" id="dob" name="dob" required />
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="form-step">
+          <select id="gender" name="gender" required>
+            <option value="">-- Select Gender --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <select id="course" name="course" required>
+            <option value="">-- Select Course --</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Full Stack Development">
+              Full Stack Development
+            </option>
+            <option value="AI / ML">AI / ML</option>
+            <option value="Software Development">Software Development</option>
+            <option value="Data Science">Data Science</option>
+          </select>
+          <div id="courseIcon" class="course-icon"></div>
+
+          <div class="voice-field">
+            <textarea
+              id="address"
+              name="address"
+              rows="3"
+              placeholder="Enter full address"
+              required
+            ></textarea>
+            <button
+              type="button"
+              class="mic-btn"
+              onclick="startVoiceInput('address')"
+            >
+              🎤
+            </button>
+          </div>
+
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="form-step">
+          <p>Review your information and click "Finish" to submit.</p>
+
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="submit" id="submitBtn">Finish</button>
+        </div>
+      </form>
+
+      <div id="result" class="result-box"></div>
+
+      <div
+        id="pdf-controls"
+        style="display: none; text-align: center; margin-top: 10px"
+      >
+        <button onclick="downloadPDF()">📄 Download PDF</button>
+        <button onclick="window.print()">🖨️ Print</button>
+      </div>
+    </section>
+
+    <div id="toast" class="toast">🎉 Registration successful!</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
